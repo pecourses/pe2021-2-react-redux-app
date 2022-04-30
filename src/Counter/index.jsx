@@ -3,22 +3,9 @@ import { connect } from 'react-redux'
 
 function Counter (props) {
   console.log('props :>> ', props)
-  const { count, step, dispatch } = props
-
-  const increment = () => {
-    const ACTION = { type: 'increment' }
-    dispatch(ACTION)
-  }
-
-  const decrement = () => {
-    const ACTION = { type: 'decrement' }
-    dispatch(ACTION)
-  }
-
-  const setStep = ({ target: { value } }) => {
-    const ACTION = { type: 'setStep', newStep: Number(value) }
-    dispatch(ACTION)
-  }
+  // состояние и обработчики появляются в пропсах благодаря
+  // connect(mapStateToProps, mapDispatchToProps)
+  const { count, step, increment, decrement, setStep } = props
 
   return (
     <>
@@ -31,9 +18,22 @@ function Counter (props) {
   )
 }
 
+// функция пробрасывает нужную часть состояния в пропсы компоненту
 const mapStateToProps = state => {
   return state
 }
 
+// функция пробрасывает обработчики в пропсы компоненту
+// если пробрасываются обработчики, то dispatch в пропсы не приходит
+const mapDispatchToProps = dispatch => {
+  return {
+    increment: () => dispatch({ type: 'increment' }),
+    decrement: () => dispatch({ type: 'decrement' }),
+    setStep: ({ target: { value } }) =>
+      dispatch({ type: 'setStep', newStep: Number(value) })
+  }
+}
+
 //  первый вызов connect прокидывает dispatch в пропсы компонента
-export default connect(mapStateToProps)(Counter)
+// (если нет второго аргумента у connect)
+export default connect(mapStateToProps, mapDispatchToProps)(Counter)
