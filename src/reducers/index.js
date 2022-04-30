@@ -1,4 +1,4 @@
-const initialState = { count: 0, step: 1 }
+const initialState = { count: 0, step: 1, isLight: true }
 
 // reducer - чистая функция, (state, action) => {return state}
 const counterReducer = (state = initialState, action) => {
@@ -16,6 +16,9 @@ const counterReducer = (state = initialState, action) => {
     case 'setStep': {
       const { newStep } = action
       return { ...state, step: newStep }
+    }
+    case 'setTheme': {
+      return { ...state, isLight: action.newTheme }
     }
     default:
       return state
