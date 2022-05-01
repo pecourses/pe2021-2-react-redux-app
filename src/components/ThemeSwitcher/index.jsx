@@ -1,5 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { setTheme } from '../../actions/actionCreators'
+import ACTION_TYPES from '../../actions/actionTypes'
 
 function ThemeSwitcher (props) {
   const { isLight, setTheme } = props
@@ -18,11 +20,7 @@ const mapStateToProps = state => {
 
 const mapDispathToProps = dispatch => {
   return {
-    setTheme: isLight =>
-      dispatch({
-        type: 'setTheme',
-        newTheme: !isLight
-      })
+    setTheme: isLight => dispatch(setTheme(isLight))
   }
 }
 

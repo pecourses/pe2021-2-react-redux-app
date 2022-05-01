@@ -1,5 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import {
+  counterDecrement,
+  counterIncrement,
+  counterSetStep
+} from '../../actions/actionCreators'
 
 function Counter (props) {
   console.log('props :>> ', props)
@@ -25,12 +30,12 @@ const mapStateToProps = state => {
 
 // функция пробрасывает обработчики в пропсы компоненту
 // если пробрасываются обработчики, то dispatch в пропсы не приходит
+
 const mapDispatchToProps = dispatch => {
   return {
-    increment: () => dispatch({ type: 'increment' }),
-    decrement: () => dispatch({ type: 'decrement' }),
-    setStep: ({ target: { value } }) =>
-      dispatch({ type: 'setStep', newStep: Number(value) })
+    increment: () => dispatch(counterIncrement()),
+    decrement: () => dispatch(counterDecrement()),
+    setStep: ({ target: { value } }) => dispatch(counterSetStep(Number(value)))
   }
 }
 
