@@ -15,7 +15,7 @@ function ThemeSwitcher (props) {
   )
 }
 const mapStateToProps = state => {
-  return { isLight: state.isLight }
+  return state.theme
 }
 
 const mapDispathToProps = dispatch => {

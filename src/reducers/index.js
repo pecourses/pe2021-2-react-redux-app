@@ -1,30 +1,15 @@
-import ACTION_TYPES from '../actions/actionTypes'
+import { combineReducers } from 'redux'
+import counterReducer from './counterReducer'
+import themeReducer from './themeReducer'
 
-const initialState = { count: 0, step: 1, isLight: true }
+const rootReducer = combineReducers({
+  theme: themeReducer,
+  counter: counterReducer
+})
 
-// reducer - чистая функция, (state, action) => {return state}
-const counterReducer = (state = initialState, action) => {
-  const { type } = action
+export default rootReducer
 
-  switch (type) {
-    case ACTION_TYPES.COUNTER_INCREMENT: {
-      const { count, step } = state
-      return { ...state, count: count + step }
-    }
-    case ACTION_TYPES.COUNTER_DECREMENT: {
-      const { count, step } = state
-      return { ...state, count: count - step }
-    }
-    case ACTION_TYPES.COUNTER_SET_STEP: {
-      const { newStep } = action
-      return { ...state, step: newStep }
-    }
-    case ACTION_TYPES.SET_THEME: {
-      return { ...state, isLight: action.newTheme }
-    }
-    default:
-      return state
-  }
-}
-
-export default counterReducer
+// state = {
+//   theme: { isLight: true },
+//   counter: { count: 0, step: 1 }
+// }

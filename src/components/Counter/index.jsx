@@ -25,7 +25,7 @@ function Counter (props) {
 
 // функция пробрасывает нужную часть состояния в пропсы компоненту
 const mapStateToProps = state => {
-  return state
+  return state.counter
 }
 
 // функция пробрасывает обработчики в пропсы компоненту
