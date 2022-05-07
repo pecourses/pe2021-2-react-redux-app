@@ -4,15 +4,15 @@ import {
   getUserSuccess,
   getUserRequest
 } from '../actions/actionCreators'
+import { getUser } from './../api'
 
 export function * getUserSaga (action) {
   // Сейчас будем грузить
   yield put(getUserRequest()) // dispatch
   try {
     // Грузить
-    const data = yield fetch('https://randomuser.me/api/').then(response =>
-      response.json()
-    )
+    const data = yield getUser()
+
     // Обновить инфу о юзере
     yield put(getUserSuccess(data.results[0]))
   } catch (e) {
